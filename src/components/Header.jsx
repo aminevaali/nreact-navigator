@@ -1,17 +1,28 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import { useState } from 'react';
 import styled from 'styled-components'
 
+const headerHeight = '10vh';
+
+const StyledHeader = styled.header`
+  display: flex;
+  justify-content: space-between;
+  background-color: #f8cd4f;
+  position: fixed;
+  height: ${headerHeight};
+  top:0;
+  width: 100%;
+`
+
 const Brand = styled.div`
-background-color: #444965;
-padding: 4px;
+// background-color: #444965;
 font-size: 12px;
-border-bottom: 1px solid black;
-color: white;
+color: #444965;
 font-weight: bold;
 display: flex;
 justify-content: center;
 align-items: center;
+padding: 0 3.5%;
 
 img {
   max-width: 32px;
@@ -33,44 +44,48 @@ img {
 `
 
 const Nav = styled.nav`
-background-color: #f8cd4f;
-position: sticky;
+height: ${headerHeight};
 top: 0;
+padding: 0 5%;
 
 .nav_links {
-margin: 0;
-list-style: none;
-display: flex;
-justify-content: space-evenly;
-align-items: center;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  height: 100%;
 
-.menu_item {
-    background-color: $menuItemBackColor;
-    transition: all ease 0.3s;
+  .menu_item {
+      transition: all ease 0.3s;
+      height: 100%;
+      
+      a {
+          text-decoration: none;
+          color: #444965;
+          font-size: 16px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100%;
+          padding: 0 20px;
+      }
+  }
 
-    a {
-        text-decoration: none;
-        color: $menuItemTextColor;
-        font-size: $menuItemFontSize;
-        display: inline-block;
-        padding: 20px;
-    }
-}
-
-.menu_item:hover {
-  background-color: rgba(255, 255, 255, 0.3);
-}
-
+  .menu_item:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
 }
 
 @media screen and (max-width: 768px){
 position: relative;
 height: 10vh;
+width: 100%;
 
 .hamburger{
   position: absolute;
   top: 50%;
-  right: 5%;
+  right: 10px;
   transform: translate(-5%, -50%);
   cursor: pointer;
   z-index: 2;
@@ -86,7 +101,9 @@ height: 10vh;
 .nav_links.pulsing_circle {
   position: fixed;
   width: 100%;
-  height: 100vh;
+  left: 0;
+  height: 90vh;
+  top: 10vh;
   flex-direction: column;
   justify-content: space-evenly;
   clip-path: circle(0px at 95% 5%);
@@ -114,6 +131,10 @@ height: 10vh;
   transition: all 0.5s ease-out 0.75s;
 }
 
+.nav_links.pulsing_circle .menu_item:nth-child(4) {
+  transition: all 0.5s ease-out 1s;
+}
+
 .nav_links.pulsing_circle.open {
   clip-path: circle(calc(100% + 100vh) at 95% 5%);
   -webkit-clip-path: circle(calc(100% + 100vh) at 95% 5%);
@@ -126,28 +147,38 @@ height: 10vh;
 }
 `
 
-export default function Header({brandIcon}) {
-    const [isOpen, setOpen] = useState(false);
+// header uses position:fixed. so scrollable container that has this element overflows behind header
+// BlankSpaceHolder adds a blank space in scrollbar with same height with header.
+const BlankSpaceHolder = styled.div`
+  width: 100%;
+  height: ${headerHeight}
+`
 
-    function toggleMenu() {
-        // const navLinks = document.querySelector('nav_links');
-        // navLinks.classList.toggle('open');
-        setOpen(!isOpen);
-    }
+export default function Header({ brandIcon }) {
+  const [isOpen, setOpen] = useState(false);
 
-    return <header className="header">
-        <Brand>Brand Name {brandIcon && <img src={brandIcon} alt='brand icon' />}</Brand>
-        <Nav>
-            <div className="hamburger" onClick={toggleMenu}>
-                <div className="line"></div>
-                <div className="line"></div>
-                <div className="line"></div>
-            </div>
-            <ul className={`nav_links pulsing_circle ${isOpen ? 'open' : ''}`}>
-                <li className="menu_item"><a href="./">About</a></li>
-                <li className="menu_item"><a href="./">Contact</a></li>
-                <li className="menu_item"><a href="./">Projects</a></li>
-            </ul>
-        </Nav>
-    </header >;
+  function toggleMenu() {
+    setOpen(!isOpen);
+  }
+
+  return <>
+    <StyledHeader>
+      <Brand>Brand Name {brandIcon && <img src={brandIcon} alt='brand icon' />}</Brand>
+      <Nav>
+        <div className="hamburger" onClick={toggleMenu}>
+          <div className="line"></div>
+          <div className="line"></div>
+          <div className="line"></div>
+        </div>
+        <ul className={`nav_links pulsing_circle ${isOpen ? 'open' : ''}`}>
+          <li className="menu_item"><a href="./">About</a></li>
+          <li className="menu_item"><a href="./">Contact</a></li>
+          <li className="menu_item"><a href="./">Projects</a></li>
+          <li className="menu_item"><a href="./">Weblog</a></li>
+        </ul>
+      </Nav>
+    </StyledHeader >
+
+    <BlankSpaceHolder />
+  </>;
 }
