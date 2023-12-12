@@ -7,7 +7,7 @@ const headerHeight = '10vh';
 const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
-  background-color: #f8cd4f;
+  background-color: ${(props) => props.$theme.primary};
   position: fixed;
   height: ${headerHeight};
   top:0;
@@ -15,9 +15,8 @@ const StyledHeader = styled.header`
 `
 
 const Brand = styled.div`
-// background-color: #444965;
 font-size: 12px;
-color: #444965;
+color: ${(props) => props.$theme.primaryText};
 font-weight: bold;
 display: flex;
 justify-content: center;
@@ -39,7 +38,7 @@ img {
   background-color: rgba(0, 0, 0, 0);
   border-width: 0;
   font-size: medium;
-  color: #444965;
+  color: ${(props) => props.$theme.primaryText};
 }
 `
 
@@ -62,7 +61,7 @@ padding: 0 5%;
       
       a {
           text-decoration: none;
-          color: #444965;
+          color: ${(props) => props.$theme.primaryText};
           font-size: 16px;
           display: flex;
           justify-content: center;
@@ -95,7 +94,7 @@ width: 100%;
   width: 30px;
   height: 3px;
   margin: 5px;
-  background-color: #444965;
+  background-color: ${(props) => props.$theme.primaryText};
 }
 
 .nav_links.pulsing_circle {
@@ -108,7 +107,7 @@ width: 100%;
   justify-content: space-evenly;
   clip-path: circle(0px at 95% 5%);
   -webkit-clip-path: circle(0px at 95% 5%);
-  background-color: #f8cd4f;
+  background-color: ${(props) => props.$theme.primary};
   transition: all 1.35s ease-out;
   pointer-events: none;
 }
@@ -154,7 +153,7 @@ const BlankSpaceHolder = styled.div`
   height: ${headerHeight}
 `
 
-export default function Header({brandName, brandIcon }) {
+export default function Header({theme, brandName, brandIcon }) {
   const [isOpen, setOpen] = useState(false);
 
   function toggleMenu() {
@@ -162,9 +161,9 @@ export default function Header({brandName, brandIcon }) {
   }
 
   return <>
-    <StyledHeader>
-      <Brand>{brandName} {brandIcon && <img src={brandIcon} alt='brand icon' />}</Brand>
-      <Nav>
+    <StyledHeader $theme={theme}>
+      <Brand $theme={theme}>{brandName} {brandIcon && <img src={brandIcon} alt='brand icon' />}</Brand>
+      <Nav $theme={theme}>
         <div className="hamburger" onClick={toggleMenu}>
           <div className="line"></div>
           <div className="line"></div>
