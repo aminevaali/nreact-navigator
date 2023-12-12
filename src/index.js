@@ -15,13 +15,13 @@ const StyledNNavigator = styled.div`
   
 `
 
-export const NNavigator = (props) => {
+export const NNavigator = ({brandName, brandIcon, children}) => {
   return (
     <StyledNNavigator>
       <GlobalStyle />
-      <Header brandIcon={props.brandIcon} />
+      <Header brandName={brandName} brandIcon={brandIcon} />
 
-      <Main>{props.children}</Main>
+      <Main>{children}</Main>
 
       <Footer/>
     </StyledNNavigator>

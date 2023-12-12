@@ -154,7 +154,7 @@ const BlankSpaceHolder = styled.div`
   height: ${headerHeight}
 `
 
-export default function Header({ brandIcon }) {
+export default function Header({brandName, brandIcon }) {
   const [isOpen, setOpen] = useState(false);
 
   function toggleMenu() {
@@ -163,7 +163,7 @@ export default function Header({ brandIcon }) {
 
   return <>
     <StyledHeader>
-      <Brand>Brand Name {brandIcon && <img src={brandIcon} alt='brand icon' />}</Brand>
+      <Brand>{brandName} {brandIcon && <img src={brandIcon} alt='brand icon' />}</Brand>
       <Nav>
         <div className="hamburger" onClick={toggleMenu}>
           <div className="line"></div>
