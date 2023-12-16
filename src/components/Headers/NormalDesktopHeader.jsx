@@ -28,18 +28,6 @@ img {
   max-height: 32px;
   margin: 0 5px;
 }
-
-@media screen and (max-width: 768px){
-  z-index: 2;
-  position: fixed;
-  top: 5vh;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0);
-  border-width: 0;
-  font-size: medium;
-  color: ${(props) => props.$theme.primaryText};
-}
 `
 
 const Nav = styled.nav`
@@ -75,75 +63,6 @@ padding: 0 5%;
     background-color: rgba(255, 255, 255, 0.3);
   }
 }
-
-@media screen and (max-width: 768px){
-position: relative;
-height: 10vh;
-width: 100%;
-
-.hamburger{
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translate(-5%, -50%);
-  cursor: pointer;
-  z-index: 2;
-}
-
-.line {
-  width: 30px;
-  height: 3px;
-  margin: 5px;
-  background-color: ${(props) => props.$theme.primaryText};
-}
-
-.nav_links.pulsing_circle {
-  position: fixed;
-  width: 100%;
-  left: 0;
-  height: 90vh;
-  top: 10vh;
-  flex-direction: column;
-  justify-content: space-evenly;
-  clip-path: circle(0px at 95% 5%);
-  -webkit-clip-path: circle(0px at 95% 5%);
-  background-color: ${(props) => props.$theme.primary};
-  transition: all 1.35s ease-out;
-  pointer-events: none;
-}
-
-.nav_links.pulsing_circle .menu_item a {
-  font-size: 25px;
-}
-
-.nav_links.pulsing_circle .menu_item {
-  opacity: 0;
-}
-
-.nav_links.pulsing_circle .menu_item:nth-child(1) {
-  transition: all 0.5s ease-out 0.25s;
-}
-.nav_links.pulsing_circle .menu_item:nth-child(2) {
-  transition: all 0.5s ease-out 0.5s;
-}
-.nav_links.pulsing_circle .menu_item:nth-child(3) {
-  transition: all 0.5s ease-out 0.75s;
-}
-
-.nav_links.pulsing_circle .menu_item:nth-child(4) {
-  transition: all 0.5s ease-out 1s;
-}
-
-.nav_links.pulsing_circle.open {
-  clip-path: circle(calc(100% + 100vh) at 95% 5%);
-  -webkit-clip-path: circle(calc(100% + 100vh) at 95% 5%);
-  pointer-events: all;
-}
-
-.nav_links.pulsing_circle.open .menu_item {
-  opacity: 1;
-}
-}
 `
 
 // header uses position:fixed. so scrollable container that has this element overflows behind header
@@ -153,7 +72,7 @@ const BlankSpaceHolder = styled.div`
   height: ${headerHeight}
 `
 
-export default function Header({theme, brandName, brandIcon }) {
+export default function NormalDesktopHeader({theme, brandName, brandIcon }) {
   const [isOpen, setOpen] = useState(false);
 
   function toggleMenu() {
