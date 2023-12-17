@@ -52,6 +52,9 @@ export const NNavigator = ({
 }) => {
   const [width, setWidth] = useState(window.width)
   useEffect(() => {
+    // managing responsiveness on component mount
+    handleResize();
+
     // Add window size change event listener on component mount
     window.addEventListener('resize', handleResize)
 
