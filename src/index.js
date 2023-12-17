@@ -42,7 +42,14 @@ const getResponsiveFooter = (width) => {
   }
 }
 
-export const NNavigator = ({ theme, brandName, brandIcon, children }) => {
+export const NNavigator = ({
+  theme,
+  brandName,
+  brandIcon,
+  children,
+
+  footerMessage
+}) => {
   const [width, setWidth] = useState(window.width)
   useEffect(() => {
     // Add window size change event listener on component mount
@@ -72,7 +79,7 @@ export const NNavigator = ({ theme, brandName, brandIcon, children }) => {
       <ResponsiveMain theme={theme}>{children}</ResponsiveMain>
 
       <ResponsiveFooter theme={theme}>
-        This is Footer text
+        {footerMessage}
       </ResponsiveFooter>
     </StyledNNavigator>
   )

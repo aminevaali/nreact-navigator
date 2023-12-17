@@ -2,12 +2,18 @@ import React from 'react'
 
 import { NNavigator } from 'nreact-navigator'
 import 'nreact-navigator/dist/index.css'
-import { BlueRed as theme} from 'nreact-colors'
-import brandIcon from './brandIcon.jpg'
+import { BlueRed as theme } from 'nreact-colors'
+import brandIcon from './eagle head logo.png'
 
 const App = () => {
   // theme.primaryText = 'red';
-  return <NNavigator theme={theme} brandName={'Nreact Navigator'} brandIcon={brandIcon}>
+  return <NNavigator
+    theme={theme}
+    brandName={'Nreact Navigator'}
+    brandIcon={brandIcon}
+    
+    footerMessage="Made by ❤️"
+  >
     <h1>This is NNavigator testtttttt</h1>
     <p>This library helps developers to make a stable and reusable structure for web projects</p>
 
