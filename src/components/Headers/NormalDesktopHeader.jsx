@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
 import { useState } from 'react';
 import styled from 'styled-components'
 
@@ -72,12 +72,14 @@ const BlankSpaceHolder = styled.div`
   height: ${headerHeight}
 `
 
-export default function NormalDesktopHeader({theme, brandName, brandIcon }) {
+export default function NormalDesktopHeader({ theme, brandName, brandIcon, menuItems, itemClickHandler }) {
   const [isOpen, setOpen] = useState(false);
 
   function toggleMenu() {
     setOpen(!isOpen);
   }
+
+
 
   return <>
     <StyledHeader $theme={theme}>
@@ -89,10 +91,13 @@ export default function NormalDesktopHeader({theme, brandName, brandIcon }) {
           <div className="line"></div>
         </div>
         <ul className={`nav_links pulsing_circle ${isOpen ? 'open' : ''}`}>
-          <li className="menu_item"><a href="./">About</a></li>
+          {
+            menuItems.map(item => <li key={item.id} className='menu_item'><a href={item.href}>{item.text}</a></li>)
+          }
+          {/* <li className="menu_item"><a href="./">About</a></li>
           <li className="menu_item"><a href="./">Contact</a></li>
           <li className="menu_item"><a href="./">Projects</a></li>
-          <li className="menu_item"><a href="./">Weblog</a></li>
+          <li className="menu_item"><a href="./">Weblog</a></li> */}
         </ul>
       </Nav>
     </StyledHeader >

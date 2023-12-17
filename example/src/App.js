@@ -11,7 +11,15 @@ const App = () => {
     theme={theme}
     brandName={'Nreact Navigator'}
     brandIcon={brandIcon}
-    
+
+    menuItems={[
+      { text: "About", id: 1, href: "#" },
+      { text: "Contact", id: 2, href: "#" },
+      { text: "Projects", id: 3, href: "#" },
+      { text: "Weblog", id: 4, href: "#" }
+    ]
+    } // todo nested menu items
+    // menuItemClickHandler={(itemId) => console.log(itemId)} // todo
     footerMessage="Made by ❤️"
   >
     <h1>This is NNavigator testtttttt</h1>

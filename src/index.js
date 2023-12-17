@@ -48,6 +48,8 @@ export const NNavigator = ({
   brandIcon,
   children,
 
+  menuItems,
+  menuItemClickHandler,
   footerMessage
 }) => {
   const [width, setWidth] = useState(window.width)
@@ -77,7 +79,7 @@ export const NNavigator = ({
     <StyledNNavigator>
       <GlobalStyle />
       {/* Theme props should be passed from nreact-colors library */}
-      <ResponsiveHeader theme={theme} brandName={brandName} brandIcon={brandIcon} />
+      <ResponsiveHeader theme={theme} brandName={brandName} brandIcon={brandIcon} menuItems={menuItems} />
 
       <ResponsiveMain theme={theme}>{children}</ResponsiveMain>
 
