@@ -16,12 +16,27 @@ const StyledNNavigator = styled.div`
   
 `
 
-const getResponsiveHeader = (width) => {
-  if (width < 768) {
-    return PulsingCircleHeader;
-  } else {
-    return NormalDesktopHeader;
+const getResponsiveHeader = (width, desktopHeader, phoneHeader, responsiveHeader) => {
+  // when responiveHeader is passed to NNavigator. header types are specified with minWidth and maxWidth
+  if(responsiveHeader){
+    for(var i=0; i < responsiveHeader.length; i++){
+      const resp = responsiveHeader[i];
+      if(resp.minWidth < width && width <= resp.maxWidth){
+        console.log(`responsive bound: min: ${resp.minWidth}, max: ${resp.maxWidth}`)
+        return resp.header;
+      }
+    };
   }
+
+  // when phoneHeader or desktopHeader are passed to NNavigator
+  if (width < 768) {
+    if(phoneHeader) return phoneHeader;
+  } else {
+    if(desktopHeader) return desktopHeader;
+  }
+
+  // when no specific header type is passed to NNavigator return NormalDesktopHeader as default header.
+  return NormalDesktopHeader;
 }
 
 const getResponsiveMain = (width) => {
@@ -43,14 +58,17 @@ const getResponsiveFooter = (width) => {
 }
 
 export const NNavigator = ({
-  theme,
-  brandName,
-  brandIcon,
-  children,
+  theme, // theme or color pallete of website. it will be imported from nreact-colors library. The project that is using our library should import nreact-colors library too.
+  brandName, // name of brand. it is normally shown in top of page in header component
+  brandIcon, // icon of brand. it is notmally shown in top of page in header component
 
-  menuItems,
-  menuItemClickHandler,
-  footerMessage
+  desktopHeader, // A component for header in desktop size
+  phoneHeader, // A component for header in phone size
+  responsiveHeader, // it has a structure like this: [{minWidth:600px, maxWidth:750px, header:NormalDesktopHeader}, {minWidth:...},...]
+  menuItems, // items that is shown in header
+  menuItemClickHandler, // event handler of item click in header
+  footerMessage, // message that is shown in footer
+  children, // child elements of NNavigator component
 }) => {
   const [width, setWidth] = useState(window.width)
   useEffect(() => {
@@ -71,7 +89,7 @@ export const NNavigator = ({
     setWidth(window.innerWidth)
   }
 
-  const ResponsiveHeader = getResponsiveHeader(width);
+  const ResponsiveHeader = getResponsiveHeader(width, desktopHeader, phoneHeader, responsiveHeader);
   const ResponsiveMain = getResponsiveMain(width);
   const ResponsiveFooter = getResponsiveFooter(width);
 
@@ -89,3 +107,5 @@ export const NNavigator = ({
     </StyledNNavigator>
   )
 }
+
+export {NormalDesktopHeader, PulsingCircleHeader, Footer};
